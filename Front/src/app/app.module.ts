@@ -13,15 +13,17 @@ import {FlatpickrModule} from 'angularx-flatpickr';
 import {MatButtonModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule} from '@angular/material';
 import { LoginComponent } from './login/login.component';
 import { RegistracionComponent } from './registracion/registracion.component';
-import {AdminLayoutModule} from './admin-layout/admin-layout.module';
-import {UcenikLayoutModule} from './ucenik-layout/ucenik-layout.module';
-import {NastavnikLayoutModule} from './nastavnik-layout/nastavnik-layout.module';
+import {SudijaLayoutModule} from './sudija-layout/sudija-layout.module';
+import { SudijaPresudeComponent } from './sudija-presude/sudija-presude.component';
+import { SudijaNovaPresudaComponent } from './sudija-nova-presuda/sudija-nova-presuda.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegistracionComponent
+    RegistracionComponent,
+    SudijaPresudeComponent,
+    SudijaNovaPresudaComponent
   ],
   imports: [
     BrowserAnimationsModule,
@@ -31,9 +33,7 @@ import {NastavnikLayoutModule} from './nastavnik-layout/nastavnik-layout.module'
     AppRoutingModule,
     NgbModule,
     ReactiveFormsModule,
-    AdminLayoutModule,
-    NastavnikLayoutModule,
-    UcenikLayoutModule,
+    SudijaLayoutModule,
     FontAwesomeModule,
     FlatpickrModule.forRoot(),
     MatFormFieldModule,

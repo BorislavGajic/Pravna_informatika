@@ -16,7 +16,15 @@ import javax.persistence.Id;
 public class Presuda {
     @Id
     private Integer id;
+    private String sud;
+    private String poslovniBroj;
     private String sudija;
-    private Integer kazna;
-    private Boolean hladnoOruzje;
+    private String tuzilac;
+    private String okrivljeni;
+    private String krivicnoDelo;
+    private String telesnePovrede;
+    private Boolean osudjen;
+    private String primenjeniPropisi;
+    private Double kaznaZatvor;
+    private Double kaznaNovac;
 }

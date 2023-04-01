@@ -4,9 +4,7 @@ import {CommonModule} from '@angular/common';
 import {BrowserModule} from '@angular/platform-browser';
 import {LoginComponent} from './login/login.component';
 import {RegistracionComponent} from './registracion/registracion.component';
-import {AdminLayoutComponent} from './admin-layout/admin-layout.component';
-import {NastavnikLayoutComponent} from './nastavnik-layout/nastavnik-layout.component';
-import {UcenikLayoutComponent} from './ucenik-layout/ucenik-layout.component';
+import {SudijaLayoutComponent} from './sudija-layout/sudija-layout.component';
 
 const routes: Routes = [
 
@@ -21,30 +19,12 @@ const routes: Routes = [
     children: [
     ]},
   {
-    path: 'admin',
-    component: AdminLayoutComponent,
+    path: 'sudija',
+    component: SudijaLayoutComponent,
     children: [
       {
         path: '',
-        loadChildren: './admin-layout/admin-layout.module#AdminLayoutModule'
-      }]
-  },
-  {
-    path: 'nastavnik',
-    component: NastavnikLayoutComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: './nastavnik-layout/nastavnik-layout.module#NastavnikLayoutModule'
-      }]
-  },
-  {
-    path: 'ucenik',
-    component: UcenikLayoutComponent,
-    children: [
-      {
-        path: '',
-        loadChildren: './ucenik-layout/ucenik-layout.module#UcenikLayoutModule'
+        loadChildren: './sudija-layout/sudija-layout.module#SudijaLayoutModule'
       }]
   },
 ];

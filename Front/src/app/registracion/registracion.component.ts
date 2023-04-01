@@ -2,9 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {first} from 'rxjs/operators';
-import {NastavnikServiceService} from '../services/nastavnik-service.service';
-import {UcenikServiceService} from '../services/ucenik-service.service';
-import {AdminServiceService} from '../services/admin-service.service';
+import {SudijaServiceService} from '../services/sudija-service.service';
 
 @Component({
   selector: 'app-registracion',
@@ -21,9 +19,7 @@ export class RegistracionComponent implements OnInit {
   kancelarije: any = [];
   constructor(    private formBuilder: FormBuilder,
                   private router: Router,
-                  private nastavnikService: NastavnikServiceService,
-                  private ucenikService: UcenikServiceService,
-                  private adminService: AdminServiceService) { }
+                  private sudijaService: SudijaServiceService) { }
 
   ngOnInit(): void {
     this.korisnikForm = this.formBuilder.group({
@@ -40,37 +36,6 @@ export class RegistracionComponent implements OnInit {
       magacinMId: [],
       pogonPId: []
     });
-
-    this.ucitajPogone();
-    this.ucitajMagacine();
-    this.ucitajKancelarije();
-  }
-
-  // tslint:disable-next-line:typedef
-  ucitajPogone() {
-    this.adminService.getPogone()
-      .pipe(first())
-      .subscribe(data => {
-        this.pogoni = data;
-      });
-  }
-
-  // tslint:disable-next-line:typedef
-  ucitajKancelarije() {
-    this.adminService.getKancelarijas()
-      .pipe(first())
-      .subscribe(data => {
-        this.kancelarije = data;
-      });
-  }
-
-  // tslint:disable-next-line:typedef
-  ucitajMagacine() {
-    this.adminService.getMagacine()
-      .pipe(first())
-      .subscribe(data => {
-        this.magacini = data;
-      });
   }
 
 
@@ -85,8 +50,8 @@ export class RegistracionComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onSubmit() {
-    if (this.myUloga.value === 'Admin'){
-      this.adminService.registrujAdmina(JSON.stringify(this.korisnikForm.value))
+    if (this.myUloga.value === 'Sudija'){
+      this.sudijaService.registrujSudiju(JSON.stringify(this.korisnikForm.value))
         .pipe(first())
         .subscribe(mesData => {
           const rradnik = {
@@ -94,37 +59,7 @@ export class RegistracionComponent implements OnInit {
             korisnickoIme: this.korisnikForm.value.korisnickoIme,
             lozinka: this.korisnikForm.value.lozinka
           };
-          this.adminService.registrujKorisnika(JSON.stringify(rradnik))
-            .pipe(first())
-            .subscribe();
-          this.router.navigate(['/']);
-        });
-    }
-    if (this.myUloga.value === 'Magacioner'){
-        this.nastavnikService.registrujMagacionera(this.korisnikForm.value)
-        .pipe(first())
-        .subscribe(mesData => {
-          const rradnik = {
-            radnikRId: mesData,
-            korisnickoIme: this.korisnikForm.value.korisnickoIme,
-            lozinka: this.korisnikForm.value.lozinka
-          };
-          this.adminService.registrujKorisnika(JSON.stringify(rradnik))
-            .pipe(first())
-            .subscribe();
-          this.router.navigate(['/']);
-        });
-    }
-    if (this.myUloga.value === 'Operater'){
-      this.ucenikService.registrujOperatera(this.korisnikForm.value)
-        .pipe(first())
-        .subscribe(mesData => {
-          const rradnik = {
-            radnikRId: mesData,
-            korisnickoIme: this.korisnikForm.value.korisnickoIme,
-            lozinka: this.korisnikForm.value.lozinka
-          };
-          this.adminService.registrujKorisnika(JSON.stringify(rradnik))
+          this.sudijaService.registrujSudiju(JSON.stringify(rradnik))
             .pipe(first())
             .subscribe();
           this.router.navigate(['/']);
