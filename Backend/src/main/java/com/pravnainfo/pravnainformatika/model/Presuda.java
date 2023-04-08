@@ -18,12 +18,15 @@ import javax.persistence.Id;
 public class Presuda {
     @Id
     private Integer id;
+    private String sud;
+    private String poslovniBroj;
     private String sudija;
-    private String Osudjeni;
-    private Integer brojZakona;
-    @Nullable
-    private Integer brojGodinaSluzenjaKazne;
-    private Boolean isHladnoOruzje;
-    private TipKazne tipKazne;
-    private String opisKazne; // mozemo koristiti i List<MoguceKazne> ili da ubacujemo u 1 string (trenutno).
+    private String tuzilac;
+    private String okrivljeni;
+    private String krivicnoDelo;
+    private String telesnePovrede;
+    private Boolean osudjen;
+    private String primenjeniPropisi;
+    private Double kaznaZatvor;
+    private Double kaznaNovac;
 }

@@ -52,8 +52,8 @@
 				<p style="text-align: center;">U IME CRNE GORE!</p>
 				<p>
 					<ref href="#os">OSNOVNI SUD U HERCEG NOVOM</ref>, po sudiji <judge id="jud01" refersTo="#lekovic">Leković Branislavu</judge>, uz učestvovanje zapisničara <ref href="#milovic">Milović
-					Tereze</ref>, u krivičnom predmetu protiv okrivljenog <party id="p2" refersTo="#rk" as="#Defendant">R.K.</ref>, zbog <ref id="krivicni_zakonik_cg_kriv_cl_154)st_1" href="krivicni_zakonik_cg/krivicni_clan/154/st/1">krivičnog djela iz čl. 154 st.1 KZ</ref>, povodom
-					optužnog predloga ODT Herceg Novi Kt.br.24/2012 od 9.03.2012. godine, nakon održanog glavnog i
+					Tereze</ref>, u krivičnom predmetu protiv okrivljenog <party id="p2" refersTo="#rk" as="#Defendant">R.K.</ref>, zbog <ref id="krivicni_zakonik_cg_kriv_cl_154_st_1" href="krivicni_zakonik_cg/krivicni_clan/154/st/1">krivičnog djela iz čl. 154 st.1 KZ</ref>, povodom
+					optužnog predloga <ref href="#odt">ODT Herceg Novi</ref> <ref id="pres_kt_br_24/2012" href="/presude/2012-03-09/Kt-br-24-12">Kt.br.24/2012</ref> od <date date="2012-03-09">9.03.2012.</date> godine, nakon održanog glavnog i
 					javnog pretresa dana <date date="2012-04-05">5.04.2012.</ref> godine, u prisustvu okrivljenog <party id="p2" refersTo="#rk" as="#Defendant">R.K.</ref>, zamjenika <ref href="#odt">ODT Herceg Novi</ref>
 					<ref href="#samardzic">Samardžić Nikole</ref> i oštećene <party id="p1" refersTo="#gs" as="#Prosecutor">G.S</party>, donio je i javno objavio slijedeću
 				</p>

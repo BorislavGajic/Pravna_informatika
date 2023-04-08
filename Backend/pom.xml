@@ -59,6 +59,12 @@
 			<artifactId>springdoc-openapi-ui</artifactId>
 			<version>1.6.12</version>
 		</dependency>
+		<!-- https://mvnrepository.com/artifact/es.ucm.fdi.gaia/jCOLIBRI -->
+		<dependency>
+			<groupId>es.ucm.fdi.gaia</groupId>
+			<artifactId>jCOLIBRI</artifactId>
+			<version>3.2</version>
+		</dependency>
     </dependencies>
 
 	<build>
