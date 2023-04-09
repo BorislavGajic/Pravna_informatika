@@ -34,8 +34,8 @@
 				<TLCRole eId="author" href="/akn/cg/ontology/role/author" showAs="Author"/>
 				<TLCRole eId="editor" href="/akn/cg/ontology/role/editor" showAs="Editor"/>
 				<TLCRole eId="generator" href="/akn/cg/ontology/role/generator" showAs="Generator"/>
-				<TLCOrganization eId="os" href="/akn/cg/ontology/organization/os" showAs="Osnovni Sud u Nikšiću"/>
-				<TLCOrganization eId="odt" href="/akn/cg/ontology/organization/odt" showAs="Osnovno državno tužilaštvo u Nikšiću"/>
+				<TLCOrganization eId="os" href="/akn/cg/ontology/organization/os" showAs="Osnovni Sud u Beranama"/>
+				<TLCOrganization eId="odt" href="/akn/cg/ontology/organization/odt" showAs="Osnovno državno tužilaštvo u Beranama"/>
 				<TLCPerson eId="timnestobolje" href="/akn/cg/ontology/person/timnestobolje" showAs="Tim pravna informatika 2022/23 zvani Nešto bolje"/>
 				<TLCPerson eId="vb" href="/akn/cg/ontology/person/judges/vb" showAs="V.B."/>
 				<TLCPerson eId="dr" href="/akn/cg/ontology/person/dr" showAs="D.R."/>

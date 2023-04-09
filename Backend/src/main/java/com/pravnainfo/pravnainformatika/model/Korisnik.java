@@ -1,12 +1,12 @@
 package com.pravnainfo.pravnainformatika.model;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -16,12 +16,20 @@ import lombok.NoArgsConstructor;
 public class Korisnik {
 
 	@Id
-    private Integer idKorisnika;
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 	private String ime;
 	private String prezime;
 	private String jmbg;
 	
 	private String korisnickoIme;
 	private String lozinka;
-	
+
+	@ManyToMany(mappedBy = "sudije", cascade = {
+			CascadeType.DETACH,
+			CascadeType.MERGE,
+			CascadeType.REFRESH,
+			CascadeType.PERSIST})
+	@JsonIgnore
+	private Set<Presuda> presude = new HashSet<>();
 }
