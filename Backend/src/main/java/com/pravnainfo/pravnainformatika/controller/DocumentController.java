@@ -1,13 +1,15 @@
 package com.pravnainfo.pravnainformatika.controller;
 
+import com.pravnainfo.pravnainformatika.dto.TipDelaDTO;
 import com.pravnainfo.pravnainformatika.services.DocumentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
 
 @RequiredArgsConstructor
@@ -26,5 +28,11 @@ public class DocumentController {
 
     public ResponseEntity<String> getRandomString(){
         return new ResponseEntity<>(documentService.parseCriminalLaw(), HttpStatus.OK);
+    }
+
+    @PostMapping("rasudjivanjePoPravilima")
+    public ResponseEntity test(@RequestBody TipDelaDTO dto) throws IOException, IllegalAccessException, InterruptedException, ParserConfigurationException, SAXException {
+        documentService.makeFactsRdf(dto);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }
