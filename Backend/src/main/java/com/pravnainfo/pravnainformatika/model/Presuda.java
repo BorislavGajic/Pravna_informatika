@@ -1,5 +1,7 @@
 package com.pravnainfo.pravnainformatika.model;
 
+import com.pravnainfo.pravnainformatika.model.enums.TipKazne;
+import org.springframework.lang.Nullable;
 import lombok.*;
 
 import javax.persistence.*;

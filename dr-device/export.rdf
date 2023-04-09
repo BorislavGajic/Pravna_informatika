@@ -274,4 +274,22 @@
      <defeasible:proof rdf:datatype='&xsd;anyURI'>&proof-export;proof7</defeasible:proof>
 </export:zk_151_teska_tjelesna_povreda_naneta_teska_doveden_zivot_u_opasnost_ili_naneta_trajna_nesposobnost>
 
+<export:zk_151b_prinudna_sterilizacija rdf:about='&export;zk_151b_prinudna_sterilizacija1'>
+     <export:defendant>Cvele</export:defendant>
+     <defeasible:truthStatus>defeasibly-proven-positive</defeasible:truthStatus>
+     <defeasible:proof rdf:datatype='&xsd;anyURI'>&proof-export;proof8</defeasible:proof>
+</export:zk_151b_prinudna_sterilizacija>
+
+<export:max_years_in_imprisonment rdf:about='&export;max_years_in_imprisonment1'>
+     <export:value>5</export:value>
+     <defeasible:truthStatus>defeasibly-proven-positive</defeasible:truthStatus>
+     <defeasible:proof rdf:datatype='&xsd;anyURI'>&proof-export;proof9</defeasible:proof>
+</export:max_years_in_imprisonment>
+
+<export:min_months_in_imprisonment rdf:about='&export;min_months_in_imprisonment1'>
+     <export:value>3</export:value>
+     <defeasible:truthStatus>defeasibly-proven-positive</defeasible:truthStatus>
+     <defeasible:proof rdf:datatype='&xsd;anyURI'>&proof-export;proof10</defeasible:proof>
+</export:min_months_in_imprisonment>
+
 </rdf:RDF>
