@@ -1,14 +1,11 @@
 package com.pravnainfo.pravnainformatika.model;
 
 import com.pravnainfo.pravnainformatika.model.enums.TipKazne;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.lang.Nullable;
+import lombok.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Data
@@ -17,16 +14,48 @@ import javax.persistence.Id;
 @Builder
 public class Presuda {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String sud;
     private String poslovniBroj;
-    private String sudija;
     private String tuzilac;
     private String okrivljeni;
     private String krivicnoDelo;
-    private String telesnePovrede;
     private Boolean osudjen;
-    private String primenjeniPropisi;
-    private Double kaznaZatvor;
-    private Double kaznaNovac;
+    private String kaznaZatvor;
+    private String kaznaNovac;
+    private Boolean hladnoOruzije;
+
+    @ManyToMany(cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST})
+    @JoinTable(
+            name = "sudija_presuda",
+            joinColumns = @JoinColumn(name = "korisnik_id"),
+            inverseJoinColumns = @JoinColumn(name = "presuda_id"))
+    private List<Korisnik> sudije;
+
+    @ManyToMany(cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST})
+    @JoinTable(
+            name = "telesna_povreda_presuda",
+            joinColumns = @JoinColumn(name = "telesna_povreda_id"),
+            inverseJoinColumns = @JoinColumn(name = "presuda_id"))
+    private List<TelesnaPovreda> telesnePovrede;
+
+    @ManyToMany(cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST})
+    @JoinTable(
+            name = "propis_presuda",
+            joinColumns = @JoinColumn(name = "propis_id"),
+            inverseJoinColumns = @JoinColumn(name = "presuda_id"))
+    private List<Propis> primenjeniPropisi;
 }

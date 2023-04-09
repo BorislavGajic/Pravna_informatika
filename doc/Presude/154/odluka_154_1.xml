@@ -37,7 +37,7 @@
 				<TLCOrganization eId="os" href="/akn/cg/ontology/organization/os" showAs="Osnovni Sud u Herceg Novom"/>
 				<TLCOrganization eId="odt" href="/akn/cg/ontology/organization/odt" showAs="Osnovno državno tužilaštvo u Hercev Novom"/>
 				<TLCPerson eId="timnestobolje" href="/akn/cg/ontology/person/timnestobolje" showAs="Tim pravna informatika 2022/23 zvani Nešto bolje"/>
-				<TLCPerson eId="lekovic" href="/akn/cg/ontology/person/judges/lekovic" showAs="Leković Branislavu"/>
+				<TLCPerson eId="lekovic" href="/akn/cg/ontology/person/judges/lekovic" showAs="Leković Branislav"/>
 				<TLCPerson eId="milovic" href="/akn/cg/ontology/person/milovic" showAs="Milović Tereza"/>
 				<TLCPerson eId="rk" href="/akn/cg/ontology/person/rk" showAs="R.K."/>
 				<TLCPerson eId="samardzic" href="/akn/cg/ontology/person/samardzic" showAs="Samardžić Nikola"/>
