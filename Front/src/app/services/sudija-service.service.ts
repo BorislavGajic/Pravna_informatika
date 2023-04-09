@@ -35,4 +35,53 @@ export class SudijaServiceService {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
   }
+
+  // tslint:disable-next-line:typedef
+  getSudija(username) {
+    return this.http.get('http://localhost:8060/api/v1/korisnik/sudija/' + username,      {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  createPresuda(presuda) {
+    return this.http.post('http://localhost:8060/api/v1/presuda', presuda,      {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  getSudije() {
+    return this.http.get('http://localhost:8060/api/v1/korisnik',      {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  getTelesnePovrede() {
+    return this.http.get('http://localhost:8060/api/v1/telesnaPovreda',      {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  getPrimenjeniPropisi() {
+    return this.http.get('http://localhost:8060/api/v1/propis',      {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  getKrivicnaDela() {
+    return this.http.get('http://localhost:8060/api/v1/krivicnoDelo',      {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
+
+  // tslint:disable-next-line:typedef
+  getKaznuPoPravilu(pravilo) {
+    return this.http.post('http://localhost:8060/api/v1/document/rasudjivanjePoPravilima', pravilo,      {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
 }

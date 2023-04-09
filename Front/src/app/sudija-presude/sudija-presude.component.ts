@@ -38,7 +38,6 @@ export class SudijaPresudeComponent implements OnInit {
     .pipe(first())
       .subscribe(data => {
         this.presude = data;
-        console.log(this.presude);
       });
   }
 
