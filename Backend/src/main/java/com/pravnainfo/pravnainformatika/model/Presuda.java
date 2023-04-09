@@ -1,11 +1,12 @@
 package com.pravnainfo.pravnainformatika.model;
 
-import com.pravnainfo.pravnainformatika.model.enums.TipKazne;
-import org.springframework.lang.Nullable;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -58,4 +59,15 @@ public class Presuda {
             joinColumns = @JoinColumn(name = "propis_id"),
             inverseJoinColumns = @JoinColumn(name = "presuda_id"))
     private List<Propis> primenjeniPropisi;
+
+    @ManyToMany(cascade = {
+            CascadeType.DETACH,
+            CascadeType.MERGE,
+            CascadeType.REFRESH,
+            CascadeType.PERSIST})
+    @JoinTable(
+            name = "krivicna_dela_presuda",
+            joinColumns = @JoinColumn(name = "krivicno_delo_id"),
+            inverseJoinColumns = @JoinColumn(name = "presuda_id"))
+    private List<KrivicnoDelo> krivicnaDela;
 }
