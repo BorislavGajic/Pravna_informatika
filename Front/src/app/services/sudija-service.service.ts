@@ -28,4 +28,11 @@ export class SudijaServiceService {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
   }
+
+  // tslint:disable-next-line:typedef
+  getPresude() {
+    return this.http.get('http://localhost:8060/api/v1/presuda',      {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
 }

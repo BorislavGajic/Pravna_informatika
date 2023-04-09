@@ -15,9 +15,6 @@ import com.pravnainfo.pravnainformatika.services.UserService;
 
 import lombok.RequiredArgsConstructor;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/korisnik")
 @RestController

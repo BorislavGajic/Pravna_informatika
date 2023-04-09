@@ -1,12 +1,9 @@
 package com.pravnainfo.pravnainformatika.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 @Entity
 @Data
@@ -21,7 +18,6 @@ public class Presuda {
     private String poslovniBroj;
     private String tuzilac;
     private String okrivljeni;
-    private String krivicnoDelo;
     private Boolean osudjen;
     private String kaznaZatvor;
     private String kaznaNovac;
