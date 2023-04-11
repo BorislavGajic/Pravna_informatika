@@ -5,6 +5,10 @@ import {first} from 'rxjs/operators';
 import {FormBuilder, FormGroup} from '@angular/forms';
 import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
+export interface DrDocResponse {
+  punishmentDescription: string
+}
+
 @Component({
   selector: 'app-sudija-nova-presuda',
   templateUrl: './sudija-nova-presuda.component.html',
@@ -219,7 +223,7 @@ export class SudijaNovaPresudaComponent implements OnInit {
     this.sudijaService.getKaznuPoPravilu(JSON.stringify(this.PresudaPraviloForm.value))
     .pipe(first())
     .subscribe(data => {
-      this.rezultatPravilo = data;
+      this.rezultatPravilo = data.punishmentDescription;
     });
 
 

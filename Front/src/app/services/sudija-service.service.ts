@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
+import { DrDocResponse } from '../sudija-nova-presuda/sudija-nova-presuda.component';
 
 @Injectable({
   providedIn: 'root'
@@ -80,8 +81,16 @@ export class SudijaServiceService {
 
   // tslint:disable-next-line:typedef
   getKaznuPoPravilu(pravilo) {
-    return this.http.post('http://localhost:8060/api/v1/document/rasudjivanjePoPravilima', pravilo,      {
+    return this.http.post<DrDocResponse>('http://localhost:8060/api/v1/document/rasudjivanjePoPravilima', pravilo,      {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
     });
   }
+
+  getTekstPresude(id){
+    return this.http.get('http://localhost:8060/api/v1/document/parse/' + id,{
+      headers: new HttpHeaders().set('Content-Type', 'text/plain'),
+      responseType: "text"
+    });
+  }
+
 }

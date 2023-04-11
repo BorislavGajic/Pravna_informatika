@@ -58,6 +58,9 @@
       <th>
         Krivicna dela
       </th>
+      <th>
+        Prikaz teksta presude
+      </th>
       </thead>
       <tbody>
       <ng-container *ngFor="let presuda of presude">
@@ -105,6 +108,12 @@
               <div ngbDropdownMenu aria-labelledby="dropdownBasic5">
                 <button ngbDropdownItem (click)="otvoriKrivicnaDela(openCom3, presuda)">Prikazi krivicna dela</button>
               </div>
+            </div>
+          </td>
+
+          <td>
+            <div class="d-inline-block">
+              <a [routerLink]="['/sudija/prikazPresude', presuda.id]" class="btn btn-outline-primary" id="dropdownBasic2" mat-raised-button>Prikaz</a>
             </div>
           </td>
 

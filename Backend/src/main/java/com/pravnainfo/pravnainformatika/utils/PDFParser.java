@@ -47,6 +47,35 @@ public class PDFParser {
             return "Bad path provided! Shady 'brZakona' or 'docName'";
         }
     }
+    
+    public String convertPDFToStringByID(int id) {
+        try {
+            //Path to PDFs
+            Path relativePath = Paths.get(System.getProperty("user.dir")).getParent()
+                    //.getParent()                          //Uncomment for unit test to pass
+                    .resolve("doc")
+                    .resolve("Presude")
+                    .resolve("db_id")
+                    .resolve(String.valueOf(id)+".pdf");
+
+            //Loading an existing document
+            File file = new File(relativePath.toUri());
+
+            PDDocument document = PDDocument.load(file);
+
+            //Instantiate PDFTextStripper class
+            PDFTextStripper pdfStripper = new PDFTextStripper();
+            //Retrieving text from PDF document
+            String pdfText = pdfStripper.getText(document);
+            //Closing the document
+            document.close();
+
+            return pdfText;
+        }
+        catch(Exception e) {
+            return "Bad path provided! Shady 'id'";
+        }
+    }
 
     public String convertCrimanlLawPdfToString(){
         try {

@@ -16,6 +16,7 @@ import { RegistracionComponent } from './registracion/registracion.component';
 import {SudijaLayoutModule} from './sudija-layout/sudija-layout.module';
 import { SudijaPresudeComponent } from './sudija-presude/sudija-presude.component';
 import { SudijaNovaPresudaComponent } from './sudija-nova-presuda/sudija-nova-presuda.component';
+import { SudijaPresudaPrikazComponent } from './sudija-presuda-prikaz/sudija-presuda-prikaz.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { SudijaNovaPresudaComponent } from './sudija-nova-presuda/sudija-nova-pr
     LoginComponent,
     RegistracionComponent,
     SudijaPresudeComponent,
-    SudijaNovaPresudaComponent
+    SudijaNovaPresudaComponent,
+    SudijaPresudaPrikazComponent
   ],
   imports: [
     BrowserAnimationsModule,

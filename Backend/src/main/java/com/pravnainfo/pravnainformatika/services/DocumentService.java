@@ -1,14 +1,18 @@
 package com.pravnainfo.pravnainformatika.services;
 
-import com.pravnainfo.pravnainformatika.dto.TipDelaDTO;
-import org.xml.sax.SAXException;
+import java.io.IOException;
 
 import javax.xml.parsers.ParserConfigurationException;
-import java.io.IOException;
+
+import org.xml.sax.SAXException;
+
+import com.pravnainfo.pravnainformatika.dto.PunishmentSuggestionDTO;
+import com.pravnainfo.pravnainformatika.dto.TipDelaDTO;
 
 public interface DocumentService {
     String parsePDF(String brZakona, String docName);
+    String parsePDFByID(int id);
     String parseCriminalLaw();
-    String makeFactsRdf(TipDelaDTO dto) throws IOException, IllegalAccessException, InterruptedException, ParserConfigurationException, SAXException;
+    PunishmentSuggestionDTO makeFactsRdf(TipDelaDTO dto) throws IOException, IllegalAccessException, InterruptedException, ParserConfigurationException, SAXException;
 
 }

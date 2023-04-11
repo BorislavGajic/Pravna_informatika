@@ -1,5 +1,6 @@
 package com.pravnainfo.pravnainformatika.services;
 
+import com.pravnainfo.pravnainformatika.dto.PunishmentSuggestionDTO;
 import com.pravnainfo.pravnainformatika.dto.TipDelaDTO;
 import com.pravnainfo.pravnainformatika.utils.PDFParser;
 import liquibase.pro.packaged.B;
@@ -38,13 +39,19 @@ public class DocumentServiceImpl implements DocumentService {
     public String parsePDF(String brZakona, String docName) {
         return parser.convertPDFToString(brZakona, docName);
     }
+    
+    @Override
+	public String parsePDFByID(int id) {
+		// TODO Auto-generated method stub
+		return parser.convertPDFToStringByID(id);
+	}
 
     public String parseCriminalLaw() {
         return parser.convertCrimanlLawPdfToString();
     }
 
     @Override
-    public String makeFactsRdf(TipDelaDTO dto) throws IOException, IllegalAccessException, InterruptedException, ParserConfigurationException, SAXException {
+    public PunishmentSuggestionDTO makeFactsRdf(TipDelaDTO dto) throws IOException, IllegalAccessException, InterruptedException, ParserConfigurationException, SAXException {
         String filer = makeFiler(dto);
 
         String currentDir = System.getProperty("user.dir");
@@ -68,9 +75,9 @@ public class DocumentServiceImpl implements DocumentService {
         fileWriter.close();
 
         doStartBat(currentDir);
-        parseExport();
+       
 
-        return null;
+        return parseExport();
     }
 
     public String makeFiler(TipDelaDTO dto) throws IllegalAccessException {
@@ -121,7 +128,7 @@ public class DocumentServiceImpl implements DocumentService {
         System.out.println("start.bat exited with code: " + execCode);
     }
 
-    public void parseExport() throws ParserConfigurationException, IOException, SAXException {
+    public PunishmentSuggestionDTO parseExport() throws ParserConfigurationException, IOException, SAXException {
         Path filePath = Paths.get(System.getProperty("user.dir")).
                 getParent().
                 resolve("dr-device").
@@ -166,5 +173,43 @@ public class DocumentServiceImpl implements DocumentService {
         System.out.println("optuzeni: " + optuzeni);
         System.out.println("tackaOptuznice: " + tackaOptuznice);
         System.out.println("godine: " + godine);
+        
+        String punishmentDesc = "Predlaže se sledeći vid sankcionisanja okrivljenog:\n\n";
+        
+        for (String key : godine.keySet()) {
+			switch(key) {
+			case "min_years_in_imprisonment":
+				punishmentDesc += "- Minimum od " + godine.get(key) + " godina zatvorske kazne\n";
+				break;
+			case "max_years_in_imprisonment":
+				punishmentDesc += "- Maksimum od " + godine.get(key) + " godina zatvorske kazne\n";
+				break;
+			case "years_in_imprisonment":
+				punishmentDesc += "- " + godine.get(key) + " godina zatvorske kazne\n";
+				break;
+			case "min_months_in_imprisonment":
+				punishmentDesc += "- Minimum od " + godine.get(key) + " meseci zatvorske kazne\n";
+				break;
+			case "max_months_in_imprisonment":
+				punishmentDesc += "- Maksimum od " + godine.get(key) + " meseci zatvorske kazne\n";
+				break;
+			case "months_in_imprisonment":
+				punishmentDesc += "- " + godine.get(key) + " meseci zatvorske kazne\n";
+				break;
+			case "novcana_kazna":
+				punishmentDesc += "- Novčana kazna u iznosu od " + godine.get(key) + " evra\n";
+				break;
+			}
+				
+		}
+        
+        PunishmentSuggestionDTO dto = new PunishmentSuggestionDTO();
+        dto.setPunishmentDescription(punishmentDesc);
+        
+        return dto;
+        
+        
     }
+
+
 }
