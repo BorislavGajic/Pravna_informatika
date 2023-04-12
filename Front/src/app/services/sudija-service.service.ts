@@ -93,4 +93,11 @@ export class SudijaServiceService {
     });
   }
 
+    // tslint:disable-next-line:typedef
+    getKaznuPoSlucaju(slucaj) {
+      return this.http.post('http://localhost:8060/api/v1/jcolibri/postColibri', slucaj,      {
+        headers: new HttpHeaders().set('Content-Type', 'application/json')
+      });
+    }
+
 }

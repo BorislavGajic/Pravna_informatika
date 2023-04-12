@@ -25,6 +25,7 @@ export class SudijaNovaPresudaComponent implements OnInit {
   PresudaPraviloForm: FormGroup;
   PresudaSlucajForm: FormGroup;
   rezultatPravilo: any = [];
+  rezultatSlucaj: any = [];
 
   constructor(private router: Router, private sudijaService: SudijaServiceService, private formBuilder: FormBuilder, private modalService: NgbModal) { }
 
@@ -108,7 +109,19 @@ export class SudijaNovaPresudaComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   Case(openCom){
-    this.router.navigate(['/sudija/presudeSudija']);
+    console.log("pozvao");
+    this.sudijaService.getKaznuPoSlucaju(JSON.stringify(this.PresudaForm.value))
+    .pipe(first())
+    .subscribe(data => {
+      console.log(data);
+      this.rezultatSlucaj = data;
+    });
+    console.log("tjt");
+    this.modalService.open(openCom, {size: 'xl'}).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed`;
+    });
   }
 
   // tslint:disable-next-line:typedef

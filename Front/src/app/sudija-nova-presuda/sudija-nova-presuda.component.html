@@ -213,33 +213,8 @@
   </div>
   <div class="modal-body">
     <div class="card-body">
-      <div class="table-responsive">
-        <table class="table table-striped">
-          <thead class=" text-primary">
-          <th>
-            Ime
-          </th>
-          <th>
-            Prezime
-          </th>
-          <th>
-            JMBG
-          </th>
-          <th>
-            Korisnicko ime
-          </th>
-          </thead>
-          <tbody>
-          <ng-container *ngFor="let sudija of sudije">
-            <tr>
-              <td>{{sudija.ime}}</td>
-              <td>{{sudija.prezime}}</td>
-              <td>{{sudija.jmbg}}</td>
-              <td>{{sudija.korisnickoIme}}</td>
-            </tr>
-          </ng-container>
-          </tbody>
-        </table>
+      <div>
+        <pre>{{rezultatSlucaj}}</pre>
       </div>
 
     </div>
