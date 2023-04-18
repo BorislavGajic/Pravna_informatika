@@ -9,13 +9,14 @@ import {SudijaCompModule} from '../sudija-comp/sudija-comp.module'; //
 import {SudijaLayoutRutes} from './sudija-layout.routing';
 import {SudijaProfilComponent} from '../sudija-profil/sudija-profil.component';
 import {MatFormFieldModule, MatSelectModule} from '@angular/material';
+import { SudijaKrivicnaDelaComponent } from '../sudija-krivicna-dela/sudija-krivicna-dela.component';
 
 
 
 @NgModule({
   declarations: [SudijaLayoutComponent,
     SudijaProfilComponent,
-    // SudijaKancelarijaComponent,
+    SudijaKrivicnaDelaComponent
     ],
   imports: [
     CommonModule,

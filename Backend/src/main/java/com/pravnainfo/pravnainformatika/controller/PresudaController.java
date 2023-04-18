@@ -1,6 +1,5 @@
 package com.pravnainfo.pravnainformatika.controller;
 
-import com.pravnainfo.pravnainformatika.dto.LoginRequest;
 import com.pravnainfo.pravnainformatika.dto.PresudaDTO;
 import com.pravnainfo.pravnainformatika.model.Presuda;
 import com.pravnainfo.pravnainformatika.repositories.PresudaRepository;
@@ -10,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -27,7 +24,6 @@ public class PresudaController {
     public ResponseEntity<List<Presuda>> getPresude(){
         List<Presuda> presude = presudaRepository.findAll();
         return new ResponseEntity<>(presude,HttpStatus.OK);
-
     }
 
     @PostMapping()
@@ -35,6 +31,10 @@ public class PresudaController {
         Presuda presuda = mapper.presudaDTOToPresuda(presudaDTO);
         Presuda savedPresuda = presudaRepository.save(presuda);
         return new ResponseEntity<>(savedPresuda,HttpStatus.OK);
+    }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Presuda> getPresuda(@PathVariable("id") Integer id){
+        return new ResponseEntity<>(presudaRepository.findById(id).orElse(null),HttpStatus.OK);
     }
 }

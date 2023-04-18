@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder} from '@angular/forms';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 import {SudijaServiceService} from '../services/sudija-service.service';
 import {first} from 'rxjs/operators';
 
@@ -12,15 +12,35 @@ import {first} from 'rxjs/operators';
 export class SudijaProfilComponent implements OnInit {
   sudija: any = [];
   korisnik: any = [];
-  constructor(private formBuilder: FormBuilder, private router: Router, private sudijaService: SudijaServiceService) { }
+  username: any = "";
+  constructor(private formBuilder: FormBuilder, private router: Router, private sudijaService: SudijaServiceService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.activatedRoute.paramMap.subscribe(paramMap => { 
+      this.username = paramMap.get('username'); 
+  });
+  if(this.username === null)
+  {
     this.ucitajSudiju();
+  } else{
+    this.ucitajSudijuUrl(this.username);
+  }
+    
   }
 
   // tslint:disable-next-line:typedef
   ucitajSudiju() {
     this.sudijaService.getUser(localStorage.getItem('currentuser').toString())
+      .pipe(first())
+      .subscribe((data: {}) => {
+          this.korisnik = data;
+          this.sudija = this.korisnik;
+        }
+      );
+  }
+
+  ucitajSudijuUrl(username) {
+    this.sudijaService.getUser(username)
       .pipe(first())
       .subscribe((data: {}) => {
           this.korisnik = data;

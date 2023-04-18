@@ -11,6 +11,7 @@ export const ROUTES: RouteInfo[] = [
   { path: '/sudija/profilSudija', title: 'Profil',  icon: '', class: '' },
   { path: '/sudija/presudeSudija', title: 'Lista presuda',  icon: '', class: '' },
   { path: '/sudija/novaPresudaSudija', title: 'Nova presuda',  icon: '', class: '' },
+  { path: '/sudija/krivicnaDela', title: 'Krivicna dela',  icon: '', class: '' },
 ];
 
 @Component({
