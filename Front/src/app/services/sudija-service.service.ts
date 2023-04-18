@@ -79,6 +79,13 @@ export class SudijaServiceService {
     });
   }
 
+   // tslint:disable-next-line:typedef
+   getKrivicnoDelo(id) {
+    return this.http.get('http://localhost:8060/api/v1/krivicnoDelo/' + id,      {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
+
   // tslint:disable-next-line:typedef
   getKaznuPoPravilu(pravilo) {
     return this.http.post<DrDocResponse>('http://localhost:8060/api/v1/document/rasudjivanjePoPravilima', pravilo,      {
@@ -99,5 +106,12 @@ export class SudijaServiceService {
         headers: new HttpHeaders().set('Content-Type', 'application/json')
       });
     }
+
+  // tslint:disable-next-line:typedef
+  getPresuda(id) {
+    return this.http.get('http://localhost:8060/api/v1/presuda/' + id,      {
+      headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
 
 }

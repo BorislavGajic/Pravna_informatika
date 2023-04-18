@@ -40,7 +40,6 @@ export class SudijaNovaPresudaComponent implements OnInit {
     });
     this.sudijaService.getTelesnePovrede().pipe(first())
     .subscribe(data => {
-      console.log(data);
       this.telesnePovrede = data;
     });
     this.sudijaService.getPrimenjeniPropisi().pipe(first())
@@ -93,7 +92,6 @@ export class SudijaNovaPresudaComponent implements OnInit {
 
    // tslint:disable-next-line:typedef
    create(){
-    console.log(this.PresudaForm);
     if (this.PresudaForm.value.sudije !== '' || this.PresudaForm.value.telesnePovrede !== '' || this.PresudaForm.value.primenjeniPropisi !== '' || this.PresudaForm.value.krivicnaDela !== '') {
     this.sudijaService.createPresuda(JSON.stringify(this.PresudaForm.value))
       .pipe(first())
@@ -109,14 +107,11 @@ export class SudijaNovaPresudaComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   Case(openCom){
-    console.log("pozvao");
     this.sudijaService.getKaznuPoSlucaju(JSON.stringify(this.PresudaForm.value))
     .pipe(first())
     .subscribe(data => {
-      console.log(data);
       this.rezultatSlucaj = data;
     });
-    console.log("tjt");
     this.modalService.open(openCom, {size: 'xl'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {

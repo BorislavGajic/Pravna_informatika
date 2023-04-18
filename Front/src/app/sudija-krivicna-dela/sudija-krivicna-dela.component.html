@@ -1,0 +1,43 @@
+<div class="panel-header panel-header-sm">
+</div>
+<html>
+<body>
+<!-- header -->
+<nav class="navbar">
+  <!--
+    <div class="navbar-brand">
+      <button class="navbar-item navbar-item-right">gfdgfdg</button>
+    </div>
+
+  -->
+  <a class="mat-button" (click)="logout()">Logout</a>
+</nav>
+
+<h1>Krivicna dela</h1>
+<div>
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead class=" text-primary">
+      <th>
+        Id
+      </th>
+      <th>
+        Naziv
+      </th>
+      <th>
+        Opis
+      </th>
+      </thead>
+      <tbody>
+      <ng-container *ngFor="let krivicnoDelo of krivicnaDela">
+        <tr>
+          <td>{{krivicnoDelo.id}}</td>
+          <td>{{krivicnoDelo.naziv}}</td>
+          <td>{{krivicnoDelo.opis}}</td>
+
+        </tr>
+      </ng-container>
+      </tbody>
+    </table>
+  </div>
+</div>
