@@ -37,9 +37,7 @@ def get():
 
     full_names = [first_name + " " + last_name for first_name, last_name in zip(first_names, last_names)]
 
-    print(full_names)
-
-    return full_names
+    return {"Lokacija: ": resultIORG, "first_names": first_names, "last_names": last_names, "full_names": full_names}
 
 if __name__ == '__main__':
     app.run()
