@@ -3,6 +3,10 @@ package com.pravnainfo.pravnainformatika.jcolibri;
 
 import com.pravnainfo.pravnainformatika.jcolibri.model.CaseDescription;
 import com.pravnainfo.pravnainformatika.jcolibri.similarity.TabularSimilarity;
+import com.pravnainfo.pravnainformatika.model.KrivicnoDelo;
+import com.pravnainfo.pravnainformatika.model.Propis;
+import com.pravnainfo.pravnainformatika.model.TelesnaPovreda;
+import com.pravnainfo.pravnainformatika.dto.PresudaDTO;
 import com.pravnainfo.pravnainformatika.jcolibri.connector.CsvConnector;
 import es.ucm.fdi.gaia.jcolibri.casebase.LinealCaseBase;
 import es.ucm.fdi.gaia.jcolibri.cbraplications.StandardCBRApplication;
@@ -36,8 +40,8 @@ public class JColibriApp implements StandardCBRApplication {
 		simConfig.setDescriptionSimFunction(new Average());  // global similarity function = average
 		
 		simConfig.addMapping(new Attribute("krivicnoDelo", CaseDescription.class), new Equal());
-		TabularSimilarity slicnostPovreda = new TabularSimilarity(Arrays.asList(new String[] {"lake", "teske"}));
-		slicnostPovreda.setSimilarity("lake", "teske", .5);
+		TabularSimilarity slicnostPovreda = new TabularSimilarity(Arrays.asList(new String[] {"laka", "teska"}));
+		slicnostPovreda.setSimilarity("laka", "teska", .5);
 		simConfig.addMapping(new Attribute("telesnePovrede", CaseDescription.class), slicnostPovreda);
 		TabularSimilarity slicnostPropisa = new TabularSimilarity(Arrays.asList(new String[] {
 				"cl. 42 st. 1 ZOBSNP",
@@ -108,6 +112,66 @@ public class JColibriApp implements StandardCBRApplication {
 			recommender.postCycle();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+	
+	public static String jcolibriNew(PresudaDTO presudaDto) {
+		JColibriApp recommender = new JColibriApp();
+		String rezultat = "";
+		try {
+			recommender.configure();
+
+			recommender.preCycle();
+			
+			CBRQuery query = new CBRQuery();
+			CaseDescription caseDescription = new CaseDescription();
+			
+			
+			String krivicnaDela = "";
+			List<KrivicnoDelo> delaLista = presudaDto.getKrivicnaDela();
+			for (int i = 0; i < delaLista.size(); i++) {
+				krivicnaDela = krivicnaDela + delaLista.get(i).getNaziv();
+				if(i != delaLista.size() - 1)
+					krivicnaDela = krivicnaDela + ",";
+			}
+			caseDescription.setKrivicnoDelo(krivicnaDela);
+			
+			
+			List<String> primenjeniPropisi = new ArrayList();
+			for (Propis propis : presudaDto.getPrimenjeniPropisi()) {
+				primenjeniPropisi.add(propis.getOpis());
+			}
+			caseDescription.setPrimenjeniPropisi(primenjeniPropisi);
+			
+			
+			List<String> telesnePovrede = new ArrayList();
+			for (TelesnaPovreda povreda : presudaDto.getTelesnePovrede()) {
+				primenjeniPropisi.add(povreda.getOpis());
+			}
+			caseDescription.setTelesnePovrede(telesnePovrede);
+			
+			query.setDescription( caseDescription );
+
+			Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(recommender._caseBase.getCases(), query, recommender.simConfig);
+			eval = SelectCases.selectTopKRR(eval, 5);
+			System.out.println("Retrieved cases:");
+			
+			rezultat = rezultat + "Predlog presuda na osnovu tri najsličnije presude u sistemu:\n\n";
+			for (RetrievalResult nse : eval) {
+				System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
+				
+				String kazna = nse.get_case().getDescription().toString().split(",")[10];
+				
+				rezultat = rezultat + kazna;
+				
+			}
+			
+			recommender.postCycle();
+			
+			return rezultat;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
 		}
 	}
 

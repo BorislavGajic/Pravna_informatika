@@ -27,7 +27,7 @@ public class CaseDescription implements CaseComponent {
 	private String vrstaPresude;
 	private List<String> primenjeniPropisi = new ArrayList<String>();
 	private String kazna;
-
+	
 	@Override
 	public String toString() {
 		return "CaseDescription [id=" + id + ", sud=" + sud + ", poslovniBroj=" + poslovniBroj + ", sudija=" + sudija
@@ -40,5 +40,7 @@ public class CaseDescription implements CaseComponent {
 	public Attribute getIdAttribute() {
 		return new Attribute("id", this.getClass());
 	}
+	
+	
 	
 }
