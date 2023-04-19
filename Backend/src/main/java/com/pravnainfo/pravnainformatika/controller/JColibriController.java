@@ -1,6 +1,7 @@
 package com.pravnainfo.pravnainformatika.controller;
 
 import com.pravnainfo.pravnainformatika.dto.PresudaDTO;
+import com.pravnainfo.pravnainformatika.dto.PunishmentSuggestionDTO;
 import com.pravnainfo.pravnainformatika.jcolibri.JColibriApp;
 import com.pravnainfo.pravnainformatika.utils.CsvUtil;
 
@@ -32,7 +33,7 @@ public class JColibriController {
     }
     
     @PostMapping("/postColibri")
-    public ResponseEntity<String> postColibri(@RequestBody PresudaDTO presudaDto) throws FileNotFoundException{
+    public ResponseEntity<PunishmentSuggestionDTO> postColibri(@RequestBody PresudaDTO presudaDto) throws FileNotFoundException{
     	csvUtil.refreshCSV();
         return new ResponseEntity<>(JColibriApp.jcolibriNew(presudaDto), HttpStatus.OK);
     }

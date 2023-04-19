@@ -13,7 +13,26 @@
   <!-- <a class="mat-button" (click)="logout()">Logout</a> -->
 </nav>
 <div class="main-content">
-  <pre [innerHTML]="sanitizedTekstPresude"></pre>
+  <div id="raw">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Tekst presude
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <pre [innerHTML]="sanitizedTekstPresude"></pre>
+    </mat-expansion-panel>
+  </div>
+  <div id="akoma">
+    <mat-expansion-panel hideToggle>
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Akoma Ntoso reprezentacija
+        </mat-panel-title>
+      </mat-expansion-panel-header>
+      <pre>{{akoma}}</pre>
+    </mat-expansion-panel>
+  </div>
 </div>
 </body>
 </html>

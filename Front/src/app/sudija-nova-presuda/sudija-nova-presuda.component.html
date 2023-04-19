@@ -12,101 +12,104 @@
   -->
   <a class="mat-button" (click)="logout()">Logout</a>
 </nav>
-
 <h1>Nova presuda</h1>
-<form [formGroup]="PresudaForm" (ngSubmit)="create()">
+<div id="forma">
 
-  <div>
-      <label>Sud: </label>
-      <input formControlName="sud">
+  <form [formGroup]="PresudaForm" (ngSubmit)="create()">
+
+    <div class="form-group">
+        <label>Sud: </label>
+        <input formControlName="sud">
+    </div>
+
+    <div class="form-group">
+        <label>poslovniBroj: </label>
+        <input formControlName="poslovniBroj">
+    </div>
+
+    <div class="form-group">
+        <label>Tuzilac: </label>
+        <input formControlName="tuzilac">
+    </div>
+
+    <div class="form-group">
+      <label>Okrivljeni: </label>
+      <input formControlName="okrivljeni">
   </div>
 
   <div>
-      <label>poslovniBroj: </label>
-      <input formControlName="poslovniBroj">
+    <label>Hladno oruzije: </label>
+    <input type="checkbox" formControlName="hladnoOruzije">
   </div>
 
   <div>
-      <label>Tuzilac: </label>
-      <input formControlName="tuzilac">
+    <label>Osudjen: </label>
+    <input type="checkbox" formControlName="osudjen">
   </div>
 
   <div>
-    <label>Okrivljeni: </label>
-    <input formControlName="okrivljeni">
-</div>
+    <label>Sudije</label>
+    <mat-form-field >
+      <mat-label>Sudije</mat-label>
+      <mat-select formControlName="sudije" multiple>
+        <mat-option id="sudije"  *ngFor="let sudija of sudije" [value]="sudija">{{sudija.ime}} {{sudija.prezime}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-<div>
-  <label>Hladno oruzije: </label>
-  <input type="checkbox" formControlName="hladnoOruzije">
-</div>
+  <div>
+    <label>Telesne povrede</label>
+    <mat-form-field >
+      <mat-label>Telesne povrede</mat-label>
+      <mat-select formControlName="telesnePovrede" multiple>
+        <mat-option id="sudije"  *ngFor="let telesnaPovreda of telesnePovrede" [value]="telesnaPovreda">{{telesnaPovreda.opis}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-<div>
-  <label>Osudjen: </label>
-  <input type="checkbox" formControlName="osudjen">
-</div>
+  <div>
+    <label>Primenjeni propisi</label>
+    <mat-form-field >
+      <mat-label>Primenjeni propisi</mat-label>
+      <mat-select formControlName="primenjeniPropisi" multiple>
+        <mat-option id="sudije"  *ngFor="let primenjenPropis of primenjeniPropisi" [value]="primenjenPropis">{{primenjenPropis.opis}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-<div>
-  <label>Sudije</label>
-  <mat-form-field >
-    <mat-label>Sudije</mat-label>
-    <mat-select formControlName="sudije" multiple>
-      <mat-option id="sudije"  *ngFor="let sudija of sudije" [value]="sudija">{{sudija.ime}} {{sudija.prezime}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
+  <div>
+    <label>Krivicna dela</label>
+    <mat-form-field >
+      <mat-label>Krivicna dela</mat-label>
+      <mat-select formControlName="krivicnaDela" multiple>
+        <mat-option id="sudije"  *ngFor="let krivicnoDelo of krivicnaDela" [value]="krivicnoDelo">{{krivicnoDelo.naziv}}</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
 
-<div>
-  <label>Telesne povrede</label>
-  <mat-form-field >
-    <mat-label>Telesne povrede</mat-label>
-    <mat-select formControlName="telesnePovrede" multiple>
-      <mat-option id="sudije"  *ngFor="let telesnaPovreda of telesnePovrede" [value]="telesnaPovreda">{{telesnaPovreda.opis}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-
-<div>
-  <label>Primenjeni propisi</label>
-  <mat-form-field >
-    <mat-label>Primenjeni propisi</mat-label>
-    <mat-select formControlName="primenjeniPropisi" multiple>
-      <mat-option id="sudije"  *ngFor="let primenjenPropis of primenjeniPropisi" [value]="primenjenPropis">{{primenjenPropis.opis}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-
-<div>
-  <label>Krivicna dela</label>
-  <mat-form-field >
-    <mat-label>Krivicna dela</mat-label>
-    <mat-select formControlName="krivicnaDela" multiple>
-      <mat-option id="sudije"  *ngFor="let krivicnoDelo of krivicnaDela" [value]="krivicnoDelo">{{krivicnoDelo.naziv}}</mat-option>
-    </mat-select>
-  </mat-form-field>
-</div>
-
-<button class="btn btn-outline-primary" (click)="Rule(openCom)">Predlog kazne po pravilu</button>
-<button class="btn btn-outline-primary" (click)="Case(openCom1)">Predlog kazne po slucaju</button>
+  <button class="btn btn-outline-primary" (click)="Rule(openCom)">Predlog kazne po pravilu</button>
+  <button class="btn btn-outline-primary" (click)="Case(openCom1)">Predlog kazne po slucaju</button>
 
 
+    
+  <div>
+    <label>Kazna zatvora: </label>
+    <input formControlName="kaznaZatvor">
+  </div>
+
+  <div>
+    <label>Kazna novac: </label>
+    <input formControlName="kaznaNovac">
+  </div>
+
+
+
+    <button type="submit" class="btn btn-primary">Sačuvaj presudu</button>
   
-<div>
-  <label>Kazna zatvora: </label>
-  <input formControlName="kaznaZatvor">
-</div>
 
-<div>
-  <label>Kazna novac: </label>
-  <input formControlName="kaznaNovac">
-</div>
-
-
-
-  <button type="submit" class="btn btn-primary">Sačuvaj presudu</button>
-</form>
 <button class="btn btn-outline-primary" (click)="GiveUp()">Odustani</button>
-
+</form>
+</div>
 <ng-template #openCom let-modal windowClass="modal-dialog">
   <div class="modal-header">
     <h4 class="modal-title" class="text-right" id="modal-basic-title3">Predlog kazne po pravilu</h4>
@@ -117,7 +120,7 @@
   <div class="modal-body">
     <div class="card-body">
       <form [formGroup]="PresudaPraviloForm" (ngSubmit)="create1()">
-        <div>
+        <div class="form-group"> 
           <label>Lisen zivota ili nanesena teska povreda: </label>
           <input type="checkbox" formControlName="neko_lisen_zivota_ili_nanesena_teska_telesna_povreda">
         </div>
@@ -213,8 +216,7 @@
   </div>
   <div class="modal-body">
     <div class="card-body">
-      <div>
-        <pre>{{rezultatSlucaj}}</pre>
+      <div [innerHTML]="rezultatSlucaj">
       </div>
 
     </div>

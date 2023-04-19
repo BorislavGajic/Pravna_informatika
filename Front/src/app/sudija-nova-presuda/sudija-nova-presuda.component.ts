@@ -92,12 +92,12 @@ export class SudijaNovaPresudaComponent implements OnInit {
 
    // tslint:disable-next-line:typedef
    create(){
-    if (this.PresudaForm.value.sudije !== '' || this.PresudaForm.value.telesnePovrede !== '' || this.PresudaForm.value.primenjeniPropisi !== '' || this.PresudaForm.value.krivicnaDela !== '') {
-    this.sudijaService.createPresuda(JSON.stringify(this.PresudaForm.value))
-      .pipe(first())
-      .subscribe();
-      this.modalService.open('Uspesno dodata presuda.');
-    }
+   //if (this.PresudaForm.value.sudije !== '' || this.PresudaForm.value.telesnePovrede !== '' || this.PresudaForm.value.primenjeniPropisi !== '' || this.PresudaForm.value.krivicnaDela !== '') {
+   // this.sudijaService.createPresuda(JSON.stringify(this.PresudaForm.value))
+   //   .pipe(first())
+   //   .subscribe();
+   //   this.modalService.open('Uspesno dodata presuda.');
+   // }
   }
 
   // tslint:disable-next-line:typedef
@@ -110,7 +110,7 @@ export class SudijaNovaPresudaComponent implements OnInit {
     this.sudijaService.getKaznuPoSlucaju(JSON.stringify(this.PresudaForm.value))
     .pipe(first())
     .subscribe(data => {
-      this.rezultatSlucaj = data;
+      this.rezultatSlucaj = data.punishmentDescription;
     });
     this.modalService.open(openCom, {size: 'xl'}).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;

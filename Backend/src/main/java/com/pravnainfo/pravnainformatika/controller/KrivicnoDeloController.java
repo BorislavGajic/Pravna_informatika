@@ -30,7 +30,7 @@ public class KrivicnoDeloController {
 		return new ResponseEntity<>(krivicnoDelos, HttpStatus.OK);
 	}
 
-	@GetMapping("/{id}")
+	@GetMapping(value = "/{id}")
 	public ResponseEntity<List<KrivicnoDelo>> getKrivicnoDelo(@PathVariable("id") Integer id){
 		List<KrivicnoDelo> krivicnoDelos = new ArrayList<>();
 		KrivicnoDelo krivicnoDelo = krivicnoDeloRepository.findById(id).orElse(null);

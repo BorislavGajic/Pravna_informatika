@@ -32,6 +32,10 @@ public class CsvConnector implements Connector {
 
 				CBRCase cbrCase = new CBRCase();
 
+				for (String val : values) {
+					System.out.println(val);
+				}
+				
 				CaseDescription caseDescription = new CaseDescription();
 				caseDescription.setId(Integer.parseInt(values[0]));
 				caseDescription.setSud(values[1]);

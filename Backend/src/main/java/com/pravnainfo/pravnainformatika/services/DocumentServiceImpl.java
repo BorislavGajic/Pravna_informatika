@@ -18,8 +18,10 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.*;
 
 import java.lang.reflect.Field;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.HashMap;
 
 @Service
@@ -210,6 +212,31 @@ public class DocumentServiceImpl implements DocumentService {
         
         
     }
+
+	@Override
+	public String getAkomaNtoso(int id) throws IOException {
+
+        //Path to PDFs
+        Path relativePath = Paths.get(System.getProperty("user.dir")).getParent()
+                //.getParent()                          //Uncomment for unit test to pass
+                .resolve("doc")
+                .resolve("Presude")
+                .resolve("db_id")
+                .resolve(String.valueOf(id)+".xml");
+
+		    // Read the contents of the file using a BufferedReader
+		    BufferedReader br = new BufferedReader(new InputStreamReader(Files.newInputStream(relativePath, StandardOpenOption.READ)));
+
+		    StringBuilder sb = new StringBuilder();
+		    String line;
+		    while ((line = br.readLine()) != null) {
+		      sb.append(line);
+		      sb.append("\n");
+		    }
+		    String xmlContent = sb.toString();
+		    
+		    return xmlContent;
+	}
 
 
 }

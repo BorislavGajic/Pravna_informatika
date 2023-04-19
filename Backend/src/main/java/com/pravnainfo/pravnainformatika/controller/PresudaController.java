@@ -33,7 +33,7 @@ public class PresudaController {
         return new ResponseEntity<>(savedPresuda,HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<Presuda> getPresuda(@PathVariable("id") Integer id){
         return new ResponseEntity<>(presudaRepository.findById(id).orElse(null),HttpStatus.OK);
     }

@@ -7,6 +7,7 @@ import com.pravnainfo.pravnainformatika.model.KrivicnoDelo;
 import com.pravnainfo.pravnainformatika.model.Propis;
 import com.pravnainfo.pravnainformatika.model.TelesnaPovreda;
 import com.pravnainfo.pravnainformatika.dto.PresudaDTO;
+import com.pravnainfo.pravnainformatika.dto.PunishmentSuggestionDTO;
 import com.pravnainfo.pravnainformatika.jcolibri.connector.CsvConnector;
 import es.ucm.fdi.gaia.jcolibri.casebase.LinealCaseBase;
 import es.ucm.fdi.gaia.jcolibri.cbraplications.StandardCBRApplication;
@@ -39,21 +40,36 @@ public class JColibriApp implements StandardCBRApplication {
 		simConfig = new NNConfig(); // KNN configuration
 		simConfig.setDescriptionSimFunction(new Average());  // global similarity function = average
 		
-		simConfig.addMapping(new Attribute("krivicnoDelo", CaseDescription.class), new Equal());
+		TabularSimilarity slicnostDelo = new TabularSimilarity(Arrays.asList(new String[] {
+				"čl. 145 Krivičnog zakonika Crne Gore",
+				"čl.151.st.1. Krivičnog zakonika Crne Gore",
+				"čl. 152 stav 2 Krivičnog zakonika Crne Gore",
+				"čl. 153 Krivičnog zakonika Crne Gore",
+				"čl.154.stav 1 Krivičnog zakonika Crne Gore"
+		}));
+		
+		slicnostDelo.setSimilarity("čl. 145 Krivičnog zakonika Crne Gore", "čl.151.st.1. Krivičnog zakonika Crne Gore", .8);
+		slicnostDelo.setSimilarity("čl. 145 Krivičnog zakonika Crne Gore", "čl. 152 stav 2 Krivičnog zakonika Crne Gore", .6);
+		slicnostDelo.setSimilarity("čl. 145 Krivičnog zakonika Crne Gore", "čl. 153 Krivičnog zakonika Crne Gore", .5);
+		slicnostDelo.setSimilarity("čl. 145 Krivičnog zakonika Crne Gore", "čl.154.stav 1 Krivičnog zakonika Crne Gore", .3);
+		
+		slicnostDelo.setSimilarity("čl.151.st.1. Krivičnog zakonika Crne Gore", "čl. 152 stav 2 Krivičnog zakonika Crne Gore", .7);
+		slicnostDelo.setSimilarity("čl.151.st.1. Krivičnog zakonika Crne Gore", "čl. 153 Krivičnog zakonika Crne Gore", .4);
+		slicnostDelo.setSimilarity("čl.151.st.1. Krivičnog zakonika Crne Gore", "čl.154.stav 1 Krivičnog zakonika Crne Gore", .3);
+		
+		slicnostDelo.setSimilarity("čl. 152 stav 2 Krivičnog zakonika Crne Gore", "čl. 153 Krivičnog zakonika Crne Gore", .7);
+		slicnostDelo.setSimilarity("čl. 152 stav 2 Krivičnog zakonika Crne Gore", "čl.154.stav 1 Krivičnog zakonika Crne Gore", .3);
+		
+		slicnostDelo.setSimilarity("čl. 153 Krivičnog zakonika Crne Gore", "čl.154.stav 1 Krivičnog zakonika Crne Gore", .8);
+		
+		simConfig.addMapping(new Attribute("krivicnoDelo", CaseDescription.class), slicnostDelo);
 		TabularSimilarity slicnostPovreda = new TabularSimilarity(Arrays.asList(new String[] {"laka", "teska"}));
-		slicnostPovreda.setSimilarity("laka", "teska", .5);
+		
+		
+		slicnostPovreda.setSimilarity("laka", "teska", .6);
 		simConfig.addMapping(new Attribute("telesnePovrede", CaseDescription.class), slicnostPovreda);
-		TabularSimilarity slicnostPropisa = new TabularSimilarity(Arrays.asList(new String[] {
-				"cl. 42 st. 1 ZOBSNP",
-				"cl. 43 st. 1 ZOBSNP",
-				"cl. 47 st. 1 ZOBSNP",
-				"cl. 47 st. 3 ZOBSNP",
-				"cl. 47 st. 4 ZOBSNP"}));
-		slicnostPropisa.setSimilarity("cl. 42 st. 1 ZOBSNP", "cl. 43 st. 1 ZOBSNP", .5);
-		slicnostPropisa.setSimilarity("cl. 47 st. 1 ZOBSNP", "cl. 47 st. 3 ZOBSNP", .5);
-		slicnostPropisa.setSimilarity("cl. 47 st. 3 ZOBSNP", "cl. 47 st. 4 ZOBSNP", .5);
-		slicnostPropisa.setSimilarity("cl. 47 st. 1 ZOBSNP", "cl. 47 st. 4 ZOBSNP", .5);
-		simConfig.addMapping(new Attribute("primenjeniPropisi", CaseDescription.class), slicnostPropisa);
+
+		simConfig.addMapping(new Attribute("primenjeniPropisi", CaseDescription.class), new Equal());
 		
 		// Equal - returns 1 if both individuals are equal, otherwise returns 0
 		// Interval - returns the similarity of two number inside an interval: sim(x,y) = 1-(|x-y|/interval)
@@ -115,7 +131,7 @@ public class JColibriApp implements StandardCBRApplication {
 		}
 	}
 	
-	public static String jcolibriNew(PresudaDTO presudaDto) {
+	public static PunishmentSuggestionDTO jcolibriNew(PresudaDTO presudaDto) {
 		JColibriApp recommender = new JColibriApp();
 		String rezultat = "";
 		try {
@@ -153,14 +169,17 @@ public class JColibriApp implements StandardCBRApplication {
 			query.setDescription( caseDescription );
 
 			Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(recommender._caseBase.getCases(), query, recommender.simConfig);
-			eval = SelectCases.selectTopKRR(eval, 5);
+			eval = SelectCases.selectTopKRR(eval, 3);
 			System.out.println("Retrieved cases:");
 			
-			rezultat = rezultat + "Predlog presuda na osnovu tri najsličnije presude u sistemu:\n\n";
+			rezultat = rezultat + "Predlog presuda na osnovu tri najsličnije presude u sistemu:<br><br>";
 			for (RetrievalResult nse : eval) {
 				System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
 				
-				String kazna = nse.get_case().getDescription().toString().split(",")[10];
+				String kazna = "<a target=\"_blank\" href=\"http://localhost:4200/sudija/prikazPresude/" + (int)nse.get_case().getID() +"\">" 
+				+ nse.get_case().getDescription().toString().split(";")[2].split("=")[1] + "</a> -> ";
+						
+				kazna = kazna + nse.get_case().getDescription().toString().split(";")[10].replace(']', ' ')+"<br>";
 				
 				rezultat = rezultat + kazna;
 				
@@ -168,7 +187,10 @@ public class JColibriApp implements StandardCBRApplication {
 			
 			recommender.postCycle();
 			
-			return rezultat;
+			PunishmentSuggestionDTO dto = new PunishmentSuggestionDTO();
+			dto.setPunishmentDescription(rezultat);
+			
+			return dto;
 		} catch (Exception e) {
 			e.printStackTrace();
 			return null;

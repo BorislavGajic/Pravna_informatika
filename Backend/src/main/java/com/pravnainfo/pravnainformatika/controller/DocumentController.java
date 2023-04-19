@@ -39,4 +39,9 @@ public class DocumentController {
     public ResponseEntity<PunishmentSuggestionDTO> poPravilima(@RequestBody TipDelaDTO dto) throws IOException, IllegalAccessException, InterruptedException, ParserConfigurationException, SAXException {
         return new ResponseEntity<>(documentService.makeFactsRdf(dto), HttpStatus.CREATED);
     }
+    
+    @GetMapping("/akomaNtoso/{id}")
+    public ResponseEntity<String> getXml(@PathVariable("id") int id) throws IOException {
+    	return new ResponseEntity<>(documentService.getAkomaNtoso(id), HttpStatus.OK);
+    }
 }

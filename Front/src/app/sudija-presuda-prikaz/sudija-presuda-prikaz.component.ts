@@ -12,6 +12,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 export class SudijaPresudaPrikazComponent implements OnInit {
   tekstPresude: any = "";
   sanitizedTekstPresude: any = '';
+  akoma: any = "";
   id: any = 0;
 
   presuda: any = [];
@@ -23,6 +24,7 @@ export class SudijaPresudaPrikazComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe(paramMap => { 
       this.id = paramMap.get('id'); 
       this.ucitajPresudu();
+      
   });
     
   }
@@ -46,6 +48,11 @@ export class SudijaPresudaPrikazComponent implements OnInit {
           this.tekstPresude = data;
           this.cdr.detectChanges();
           this.getPresuda();
+          this.sudijaService.getAkomaTekstPresude(this.id)
+          .pipe(first())
+          .subscribe((data: {}) => {
+            this.akoma = data;
+          })
         }
       );
   }

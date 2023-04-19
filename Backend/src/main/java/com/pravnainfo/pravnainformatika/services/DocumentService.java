@@ -14,5 +14,6 @@ public interface DocumentService {
     String parsePDFByID(int id);
     String parseCriminalLaw();
     PunishmentSuggestionDTO makeFactsRdf(TipDelaDTO dto) throws IOException, IllegalAccessException, InterruptedException, ParserConfigurationException, SAXException;
+	String getAkomaNtoso(int id) throws IOException;
 
 }

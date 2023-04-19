@@ -11,6 +11,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {FlatpickrModule} from 'angularx-flatpickr';
 import {MatButtonModule, MatDatepickerModule, MatFormFieldModule, MatNativeDateModule, MatSelectModule} from '@angular/material';
+import {MatExpansionModule} from '@angular/material/expansion';
 import { LoginComponent } from './login/login.component';
 import { RegistracionComponent } from './registracion/registracion.component';
 import {SudijaLayoutModule} from './sudija-layout/sudija-layout.module';
@@ -43,7 +44,8 @@ import { SudijaPresudaPrikazComponent } from './sudija-presuda-prikaz/sudija-pre
     MatDatepickerModule,
     MatButtonModule,
     MatFormFieldModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatExpansionModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -100,9 +100,16 @@ export class SudijaServiceService {
     });
   }
 
+  getAkomaTekstPresude(id){
+    return this.http.get('http://localhost:8060/api/v1/document/akomaNtoso/' + id,{
+      headers: new HttpHeaders().set('Content-Type', 'text/plain'),
+      responseType: "text"
+    });
+  }
+
     // tslint:disable-next-line:typedef
     getKaznuPoSlucaju(slucaj) {
-      return this.http.post('http://localhost:8060/api/v1/jcolibri/postColibri', slucaj,      {
+      return this.http.post<DrDocResponse>('http://localhost:8060/api/v1/jcolibri/postColibri', slucaj,      {
         headers: new HttpHeaders().set('Content-Type', 'application/json')
       });
     }
