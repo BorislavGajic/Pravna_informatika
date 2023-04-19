@@ -87,9 +87,6 @@
     </mat-form-field>
   </div>
 
-  <button class="btn btn-outline-primary" (click)="Rule(openCom)">Predlog kazne po pravilu</button>
-  <button class="btn btn-outline-primary" (click)="Case(openCom1)">Predlog kazne po slucaju</button>
-
 
     
   <div>
@@ -106,9 +103,12 @@
 
     <button type="submit" class="btn btn-primary">Sačuvaj presudu</button>
   
-
-<button class="btn btn-outline-primary" (click)="GiveUp()">Odustani</button>
 </form>
+</div>
+<div>
+  <button class="btn btn-outline-primary" (click)="Rule(openCom)">Predlog kazne po pravilu</button>
+  <button class="btn btn-outline-primary" (click)="Case(openCom1)">Predlog kazne po slucaju</button>
+  <button class="btn btn-outline-primary" (click)="GiveUp()">Odustani</button>
 </div>
 <ng-template #openCom let-modal windowClass="modal-dialog">
   <div class="modal-header">
