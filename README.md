@@ -8,7 +8,9 @@ Takodje se pobrinuti da pre pokretanja port 8060 bude slobodan
 ### pokrenuti front angular app
 
 cd Front/src/app
+
 npm install
+
 ng serve
 
 # pokrenuti python metadata app
