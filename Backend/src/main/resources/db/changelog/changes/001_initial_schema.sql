@@ -42,6 +42,8 @@ create table if not exists presuda (
     kazna_zatvor varchar(255),
     kazna_novac varchar(255),
     hladno_oruzije boolean,
+	predumisljaj boolean,
+	odnos varchar(225),
 
     primary key (id)
 );

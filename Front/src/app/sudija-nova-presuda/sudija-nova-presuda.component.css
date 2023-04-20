@@ -45,4 +45,11 @@ mat-select {
   button {
     margin-top: 1rem;
   }
-  
+
+
+fieldset{
+
+  border: 2px solid black;
+  margin: 3px;
+  padding: 3px;
+}

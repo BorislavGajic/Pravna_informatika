@@ -22,6 +22,8 @@ public class Presuda {
     private String kaznaZatvor;
     private String kaznaNovac;
     private Boolean hladnoOruzije;
+	private Boolean predumisljaj;
+	private String odnos;
 
     @ManyToMany(cascade = {
             CascadeType.DETACH,

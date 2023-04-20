@@ -6,6 +6,7 @@ import com.pravnainfo.pravnainformatika.jcolibri.similarity.TabularSimilarity;
 import com.pravnainfo.pravnainformatika.model.KrivicnoDelo;
 import com.pravnainfo.pravnainformatika.model.Propis;
 import com.pravnainfo.pravnainformatika.model.TelesnaPovreda;
+import com.pravnainfo.pravnainformatika.dto.PredlogPoSlucajuDTO;
 import com.pravnainfo.pravnainformatika.dto.PresudaDTO;
 import com.pravnainfo.pravnainformatika.dto.PunishmentSuggestionDTO;
 import com.pravnainfo.pravnainformatika.jcolibri.connector.CsvConnector;
@@ -40,36 +41,39 @@ public class JColibriApp implements StandardCBRApplication {
 		simConfig = new NNConfig(); // KNN configuration
 		simConfig.setDescriptionSimFunction(new Average());  // global similarity function = average
 		
-		TabularSimilarity slicnostDelo = new TabularSimilarity(Arrays.asList(new String[] {
-				"čl. 145 Krivičnog zakonika Crne Gore",
-				"čl.151.st.1. Krivičnog zakonika Crne Gore",
-				"čl. 152 stav 2 Krivičnog zakonika Crne Gore",
-				"čl. 153 Krivičnog zakonika Crne Gore",
-				"čl.154.stav 1 Krivičnog zakonika Crne Gore"
-		}));
-		
-		slicnostDelo.setSimilarity("čl. 145 Krivičnog zakonika Crne Gore", "čl.151.st.1. Krivičnog zakonika Crne Gore", .8);
-		slicnostDelo.setSimilarity("čl. 145 Krivičnog zakonika Crne Gore", "čl. 152 stav 2 Krivičnog zakonika Crne Gore", .6);
-		slicnostDelo.setSimilarity("čl. 145 Krivičnog zakonika Crne Gore", "čl. 153 Krivičnog zakonika Crne Gore", .5);
-		slicnostDelo.setSimilarity("čl. 145 Krivičnog zakonika Crne Gore", "čl.154.stav 1 Krivičnog zakonika Crne Gore", .3);
-		
-		slicnostDelo.setSimilarity("čl.151.st.1. Krivičnog zakonika Crne Gore", "čl. 152 stav 2 Krivičnog zakonika Crne Gore", .7);
-		slicnostDelo.setSimilarity("čl.151.st.1. Krivičnog zakonika Crne Gore", "čl. 153 Krivičnog zakonika Crne Gore", .4);
-		slicnostDelo.setSimilarity("čl.151.st.1. Krivičnog zakonika Crne Gore", "čl.154.stav 1 Krivičnog zakonika Crne Gore", .3);
-		
-		slicnostDelo.setSimilarity("čl. 152 stav 2 Krivičnog zakonika Crne Gore", "čl. 153 Krivičnog zakonika Crne Gore", .7);
-		slicnostDelo.setSimilarity("čl. 152 stav 2 Krivičnog zakonika Crne Gore", "čl.154.stav 1 Krivičnog zakonika Crne Gore", .3);
-		
-		slicnostDelo.setSimilarity("čl. 153 Krivičnog zakonika Crne Gore", "čl.154.stav 1 Krivičnog zakonika Crne Gore", .8);
-		
-		simConfig.addMapping(new Attribute("krivicnoDelo", CaseDescription.class), slicnostDelo);
-		TabularSimilarity slicnostPovreda = new TabularSimilarity(Arrays.asList(new String[] {"laka", "teska"}));
-		
-		
+		TabularSimilarity slicnostPovreda = new TabularSimilarity(Arrays.asList(new String[] {"laka", "teska", "ubistvo"}));
 		slicnostPovreda.setSimilarity("laka", "teska", .6);
+		slicnostPovreda.setSimilarity("laka", "ubistvo", .2);
+		slicnostPovreda.setSimilarity("teska","ubistvo", .8);
 		simConfig.addMapping(new Attribute("telesnePovrede", CaseDescription.class), slicnostPovreda);
 
-		simConfig.addMapping(new Attribute("primenjeniPropisi", CaseDescription.class), new Equal());
+		TabularSimilarity slicnostOruzje = new TabularSimilarity(Arrays.asList(new String[] {"naoruzan", "nenaoruzan"}));
+		slicnostOruzje.setSimilarity("naoruzan", "nenaoruzan", .4);
+		simConfig.addMapping(new Attribute("hladnoOruzje", CaseDescription.class), slicnostOruzje);
+		
+		simConfig.addMapping(new Attribute("predumisljaj", CaseDescription.class), new Equal());
+		
+		TabularSimilarity slicnostOdnos = new TabularSimilarity(Arrays.asList(new String[] {"stranci", "poznanici", "prijatelji","kolege","rodbina_sira","rodbina_uza"}));
+		slicnostOdnos.setSimilarity("stranci", "poznanici", .7);
+		slicnostOdnos.setSimilarity("stranci", "prijatelji", .4);
+		slicnostOdnos.setSimilarity("stranci","kolege", .5);
+		slicnostOdnos.setSimilarity("stranci", "rodbina_sira", .6);
+		slicnostOdnos.setSimilarity("stranci","rodbina_uza", .2);
+		
+		slicnostOdnos.setSimilarity("poznanici", "prijatelji", .3);
+		slicnostOdnos.setSimilarity("poznanici","kolege", .6);
+		slicnostOdnos.setSimilarity("poznanici", "rodbina_sira", .5);
+		slicnostOdnos.setSimilarity("poznanici","rodbina_uza", .3);
+		
+		slicnostOdnos.setSimilarity("prijatelji","kolege", .5);
+		slicnostOdnos.setSimilarity("prijatelji", "rodbina_sira", .6);
+		slicnostOdnos.setSimilarity("prijatelji","rodbina_uza", .8);
+		
+		slicnostOdnos.setSimilarity("kolege", "rodbina_sira", .6);
+		slicnostOdnos.setSimilarity("kolege","rodbina_uza", .3);
+		
+		slicnostOdnos.setSimilarity("rodbina_sira","rodbina_uza", .8);
+		simConfig.addMapping(new Attribute("odnosOkrivljenogIOstecenog", CaseDescription.class), slicnostOdnos);
 		
 		// Equal - returns 1 if both individuals are equal, otherwise returns 0
 		// Interval - returns the similarity of two number inside an interval: sim(x,y) = 1-(|x-y|/interval)
@@ -131,7 +135,7 @@ public class JColibriApp implements StandardCBRApplication {
 		}
 	}
 	
-	public static PunishmentSuggestionDTO jcolibriNew(PresudaDTO presudaDto) {
+	public static PunishmentSuggestionDTO jcolibriNew(PredlogPoSlucajuDTO presudaDto) {
 		JColibriApp recommender = new JColibriApp();
 		String rezultat = "";
 		try {
@@ -141,45 +145,34 @@ public class JColibriApp implements StandardCBRApplication {
 			
 			CBRQuery query = new CBRQuery();
 			CaseDescription caseDescription = new CaseDescription();
-			
-			
-			String krivicnaDela = "";
-			List<KrivicnoDelo> delaLista = presudaDto.getKrivicnaDela();
-			for (int i = 0; i < delaLista.size(); i++) {
-				krivicnaDela = krivicnaDela + delaLista.get(i).getNaziv();
-				if(i != delaLista.size() - 1)
-					krivicnaDela = krivicnaDela + ",";
-			}
-			caseDescription.setKrivicnoDelo(krivicnaDela);
-			
-			
-			List<String> primenjeniPropisi = new ArrayList();
-			for (Propis propis : presudaDto.getPrimenjeniPropisi()) {
-				primenjeniPropisi.add(propis.getOpis());
-			}
-			caseDescription.setPrimenjeniPropisi(primenjeniPropisi);
-			
-			
+
+			caseDescription.setOdnosOkrivljenogIOstecenog(presudaDto.getOdnos().get(0));
+			caseDescription.setHladnoOruzje(presudaDto.getHladnoOruzije() ? "naoruzan" : "nenaoruzan");
+			caseDescription.setPredumisljaj(presudaDto.getPredumisljaj() ? "sa" : "bez");
+			 
 			List<String> telesnePovrede = new ArrayList();
 			for (TelesnaPovreda povreda : presudaDto.getTelesnePovrede()) {
-				primenjeniPropisi.add(povreda.getOpis());
+				telesnePovrede.add(povreda.getOpis());
 			}
 			caseDescription.setTelesnePovrede(telesnePovrede);
 			
 			query.setDescription( caseDescription );
 
 			Collection<RetrievalResult> eval = NNScoringMethod.evaluateSimilarity(recommender._caseBase.getCases(), query, recommender.simConfig);
-			eval = SelectCases.selectTopKRR(eval, 3);
+			eval = SelectCases.selectTopKRR(eval, 5);
 			System.out.println("Retrieved cases:");
 			
-			rezultat = rezultat + "Predlog presuda na osnovu tri najsličnije presude u sistemu:<br><br>";
+			rezultat = rezultat + "<div><p><b>Predlog presuda na osnovu pet najsličnijih presuda u sistemu:</b>\n</p></div>";
 			for (RetrievalResult nse : eval) {
 				System.out.println(nse.get_case().getDescription() + " -> " + nse.getEval());
 				
-				String kazna = "<a target=\"_blank\" href=\"http://localhost:4200/sudija/prikazPresude/" + (int)nse.get_case().getID() +"\">" 
-				+ nse.get_case().getDescription().toString().split(";")[2].split("=")[1] + "</a> -> ";
+				String kazna = "<div><a target=\"_blank\" href=\"http://localhost:4200/sudija/prikazPresude/" + (int)nse.get_case().getID() +"\">" 
+				+ nse.get_case().getDescription().toString().split(";")[2].split("=")[1] + "</a><br/><br/>";
 						
-				kazna = kazna + nse.get_case().getDescription().toString().split(";")[10].replace(']', ' ')+"<br>";
+				kazna = kazna + nse.get_case().getDescription().toString().split(";")[10].replace(']', ' ')+"<br/><br/>";
+				kazna = kazna + nse.get_case().getDescription().toString().split(";")[6]+"<br/><br/>";
+				kazna = kazna + nse.get_case().getDescription().toString().split(";")[9]+"<br/><br/>";
+				kazna = kazna + nse.get_case().getDescription().toString().split(";")[8]+"<br/><br/></div>";
 				
 				rezultat = rezultat + kazna;
 				

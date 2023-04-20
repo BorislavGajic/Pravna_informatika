@@ -29,7 +29,7 @@ public class CsvUtil {
 		List<String[]> dataLines = new ArrayList();
 		dataLines.add(new String[] 
 				  { "#id","Sud","Poslovni broj","Sudija","Tuzilac","Okrivljeni","Krivicno delo",
-						  "Telesne povrede","Vrsta presude","Primenjeni propisi","Kazna"});
+						  "Telesne povrede","Hladno oružje","Predumišljaj","Odnos okrivljenog i oštećenog","Vrsta presude","Primenjeni propisi","Kazna"});
 	
 		List<Presuda> presude = presudaRepository.findAll();
 		
@@ -82,8 +82,6 @@ public class CsvUtil {
 		
 		for (int i = 0; i < propisiLista.size(); i++) {
 			primenjeniPropisi = primenjeniPropisi + propisiLista.get(i).getOpis();
-			System.out.println(propisiLista.size() - 1);
-			System.out.println(i);
 			if(i != propisiLista.size() - 1)
 				primenjeniPropisi = primenjeniPropisi + ",";
 		}
@@ -101,6 +99,9 @@ public class CsvUtil {
 						  presuda.getOkrivljeni(),
 						  krivicnaDela,
 						  telesnePovrede,
+						  presuda.getHladnoOruzije() ? "naoruzan" : "nenaoruzan",
+						  presuda.getPredumisljaj() ? "sa" : "bez",
+					      presuda.getOdnos(),
 						  presuda.getOsudjen() ? "osudjujuca" : "oslobadjajuca",
 						  primenjeniPropisi,
 						  kazna});

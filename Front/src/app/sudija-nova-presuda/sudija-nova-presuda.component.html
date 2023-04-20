@@ -16,7 +16,8 @@
 <div id="forma">
 
   <form [formGroup]="PresudaForm" (ngSubmit)="create()">
-
+    <fieldset>
+      <legend>Opšti podaci</legend>
     <div class="form-group">
         <label>Sud: </label>
         <input formControlName="sud">
@@ -38,16 +39,6 @@
   </div>
 
   <div>
-    <label>Hladno oruzije: </label>
-    <input type="checkbox" formControlName="hladnoOruzije">
-  </div>
-
-  <div>
-    <label>Osudjen: </label>
-    <input type="checkbox" formControlName="osudjen">
-  </div>
-
-  <div>
     <label>Sudije</label>
     <mat-form-field >
       <mat-label>Sudije</mat-label>
@@ -55,6 +46,18 @@
         <mat-option id="sudije"  *ngFor="let sudija of sudije" [value]="sudija">{{sudija.ime}} {{sudija.prezime}}</mat-option>
       </mat-select>
     </mat-form-field>
+  </div>
+    </fieldset>
+    <fieldset>
+      <legend>Podaci za rasuđivanje</legend>
+  <div>
+    <label>Hladno oruzije: </label>
+    <input type="checkbox" formControlName="hladnoOruzije">
+  </div>
+
+  <div>
+    <label>Predumišljaj: </label>
+    <input type="checkbox" formControlName="predumisljaj">
   </div>
 
   <div>
@@ -67,6 +70,23 @@
     </mat-form-field>
   </div>
 
+  <div>
+    <label>Odnos okrivljenog i oštećenog</label>
+    <mat-form-field >
+      <mat-label>Odnos okrivljenog i oštećenog</mat-label>
+      <mat-select formControlName="odnos" multiple>
+        <mat-option id="sudije" value="stranci">Stranci</mat-option>
+        <mat-option id="sudije" value="poznanici">Poznanici</mat-option>
+        <mat-option id="sudije" value="prijatelji">Prijatelji</mat-option>
+        <mat-option id="sudije" value="kolege">Kolege</mat-option>
+        <mat-option id="sudije" value="rodbina_sira">Šira rodbina</mat-option>
+        <mat-option id="sudije" value="rodbina_uza">Uža rodbina</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+    </fieldset>
+<fieldset>
+  <legend>Presuda</legend>
   <div>
     <label>Primenjeni propisi</label>
     <mat-form-field >
@@ -87,7 +107,10 @@
     </mat-form-field>
   </div>
 
-
+  <div>
+    <label>Osudjen: </label>
+    <input type="checkbox" formControlName="osudjen">
+  </div>
     
   <div>
     <label>Kazna zatvora: </label>
@@ -98,7 +121,7 @@
     <label>Kazna novac: </label>
     <input formControlName="kaznaNovac">
   </div>
-
+</fieldset>
 
 
     <button type="submit" class="btn btn-primary">Sačuvaj presudu</button>
@@ -216,7 +239,7 @@
   </div>
   <div class="modal-body">
     <div class="card-body">
-      <div [innerHTML]="rezultatSlucaj">
+      <div [innerHTML]="rezultatSlucaj" style="white-space: pre-line;display: block;">
       </div>
 
     </div>

@@ -60,6 +60,8 @@ export class SudijaNovaPresudaComponent implements OnInit {
       kaznaZatvor: [''],
       kaznaNovac: [''],
       hladnoOruzije: [false],
+      odnos: [''],
+      predumisljaj: [false],
       sudije: [''],
       telesnePovrede: [''],
       primenjeniPropisi: [''],

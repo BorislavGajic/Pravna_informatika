@@ -19,6 +19,8 @@ public class PresudaDTO {
 	private String kaznaZatvor;
 	private String kaznaNovac;
 	private Boolean hladnoOruzije;
+	private Boolean predumisljaj;
+	private String odnos;
 	private List<Korisnik> sudije;
 	private List<TelesnaPovreda> telesnePovrede;
 	private List<Propis> primenjeniPropisi;

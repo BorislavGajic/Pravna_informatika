@@ -31,10 +31,6 @@ public class CsvConnector implements Connector {
 				String[] values = line.split(";");
 
 				CBRCase cbrCase = new CBRCase();
-
-				for (String val : values) {
-					System.out.println(val);
-				}
 				
 				CaseDescription caseDescription = new CaseDescription();
 				caseDescription.setId(Integer.parseInt(values[0]));
@@ -45,9 +41,12 @@ public class CsvConnector implements Connector {
 				caseDescription.setOkrivljeni(values[5]);
 				caseDescription.setKrivicnoDelo(values[6]);
 				caseDescription.setTelesnePovrede(Arrays.asList(values[7].split(",")));
-				caseDescription.setVrstaPresude(values[8]);
-				caseDescription.setPrimenjeniPropisi(Arrays.asList(values[9].split(",")));
-				caseDescription.setKazna(values[10]);
+				caseDescription.setHladnoOruzje(values[8]);
+				caseDescription.setPredumisljaj(values[9]);
+				caseDescription.setOdnosOkrivljenogIOstecenog(values[10]);
+				caseDescription.setVrstaPresude(values[11]);
+				caseDescription.setPrimenjeniPropisi(Arrays.asList(values[12].split(",")));
+				caseDescription.setKazna(values[13]);
 								
 				cbrCase.setDescription(caseDescription);
 				cases.add(cbrCase);
