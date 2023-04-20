@@ -27,7 +27,8 @@ def get():
     regexZaDatumZlocina = r"Dana, [0-9]{2}\.[0-9]{2}\.[0-9]{4} godine"
     datumZlocina = re.findall(regexZaDatumZlocina, text)
 
-    datumZlocina = datumZlocina[0]
+    if len(datumZlocina) > 0:
+        datumZlocina = datumZlocina[0]
 
     regexBrojaClana = r"čl\.\s+\d+"
     sviClanoviZakona = re.findall(regexBrojaClana, text)
