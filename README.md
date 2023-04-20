@@ -15,16 +15,14 @@ ng serve
 
 # pokrenuti python metadata app
 
-Start the app by firstly activating the virtual environemnt with: 
-* .\venv\Scripts\activate 
- * if not created then use `python3 -m venv /path/to/new/virtual/environment`
-___
-After that use `pip install -r requirements.txt` to install needed python modules - _just for first time use_
-___
-The application is started via `flask run --reload` for hot reload enabled
+cd flask_microservice
 
-_python app.py works as well :)_
+python -m venv env
 
-FYI: The NLP modell needs some time (1-3 sec in average) to calculate the text
+.\env\Scripts\activate
 
+pip install -r requirements.txt
 
+flask run --reload
+
+FYI: The NLP modell needs some time (1-3 sec in average) to calculate response
