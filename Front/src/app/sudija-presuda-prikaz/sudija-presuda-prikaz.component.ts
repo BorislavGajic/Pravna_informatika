@@ -31,7 +31,6 @@ export class SudijaPresudaPrikazComponent implements OnInit {
 
   async getPresuda() {
     this.presuda = await this.sudijaService.getPresuda(this.id).toPromise();
-    console.log(this.presuda);
     for(var sudija of this.presuda.sudije) {
       this.tekstPresude = this.markSudije(this.tekstPresude, sudija.prezime, sudija.korisnickoIme);
     }
@@ -64,7 +63,7 @@ export class SudijaPresudaPrikazComponent implements OnInit {
 
   markDelo(text: string, delo, id): string {
     const regex = delo;
-    return text.replace(regex, '<a href="http://localhost:4200/sudija/krivicnaDela/' + id + '">$&</a>');
+    return text.replace(regex, '<a href="http://localhost:4200/sudija/krivicnaDela/' + id + '#' + id +'">$&</a>');
   }
 
     // tslint:disable-next-line:typedef
