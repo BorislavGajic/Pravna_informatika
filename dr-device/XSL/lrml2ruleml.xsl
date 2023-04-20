@@ -17,7 +17,32 @@
         <RuleML>
             <xsl:attribute name="proof">proof.ruleml</xsl:attribute>
             <xsl:attribute name="rdf_export">export.rdf</xsl:attribute>
-            <xsl:attribute name="rdf_export_classes">is_speeding_on_town_road_lv3_with_accident is_speeding_on_town_road_lv1 is_speeding_on_town_road_lv2 to_pay_min to_pay_max max_imprisonment is_speeding_on_town_road_lv3 to_pay</xsl:attribute>
+            <xsl:attribute name="rdf_export_classes">
+                zk_145_ubistvo_na_mah
+                zk_153_ucestvovanje_u_tuci
+                zk_154_ugrozavanjem_opasnim_orudjem_pri_tuci_i_svadji
+                zk_152_laka_tjelesna_povreda
+                zk_152_laka_tjelesna_povreda_sa_oruzjem_orudjem
+                zk_152_opomena_laka_tjelesna_povreda_sa_oruzjem_orudjem
+                zk_152_laka_tjelesna_povreda_gonjenje_po_privatnoj_tuzbi
+                zk_151_teska_tjelesna_povreda
+                zk_151_teska_tjelesna_povreda_naneta_teska_doveden_zivot_u_opasnost_ili_naneta_trajna_nesposobnost
+                zk_151_teska_tjelesna_povreda_i_nastupila_smrt
+                zk_151_teska_telesna_povreda_ili_zdravlje_narusi_iz_nehata
+                zk_151_tesko_telesno_povrijedi_ili_mu_zdravlje_narusi_ucinjeno_na_mah_doveden_u_razdrazenost_bez_svoje_krivice
+                zk_151_teska_telesna_povreda_ili_zdravlje_tesko_narusi_tako_da_mu_je_doveden_zivot_u_opasnost_na_mah_doveden_u_razdrazenost_bez_svoje_krivice
+                zk_151_teska_telesna_povreda_i_nastupila_smrt_doveden_u_razdrazenost_bez_svoje_krivice
+                zk_151a_sakacenje_zenskih_genitalija
+                zk_151b_prinudna_sterilizacija
+                min_years_in_imprisonment
+                max_years_in_imprisonment
+                min_months_in_imprisonment
+                months_in_imprisonment
+                years_in_imprisonment
+                novcana_kazna
+                izrecena_opomena
+                gonjenje_po_privatnoj_tuzbi
+            </xsl:attribute>
             <xsl:attribute name="rdf_import">&quot;facts.rdf&quot;</xsl:attribute>
             <xsl:apply-templates select="lrml:Statements"/>
         </RuleML>
