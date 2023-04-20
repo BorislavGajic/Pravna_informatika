@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 import { DrDocResponse } from '../sudija-nova-presuda/sudija-nova-presuda.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SudijaServiceService {
+
   constructor(private http: HttpClient) { }
 
   // tslint:disable-next-line:typedef
@@ -118,6 +119,14 @@ export class SudijaServiceService {
   getPresuda(id) {
     return this.http.get('http://localhost:8060/api/v1/presuda/' + id,      {
       headers: new HttpHeaders().set('Content-Type', 'application/json')
+    });
+  }
+
+  getAttributes(text: any) {
+    const body = {tekstPresude: text}
+    return this.http.post('http://localhost:5000/get/',body,{
+      headers: new HttpHeaders().set('Content-Type', 'application/json'),
+      responseType: "text", 
     });
   }
 

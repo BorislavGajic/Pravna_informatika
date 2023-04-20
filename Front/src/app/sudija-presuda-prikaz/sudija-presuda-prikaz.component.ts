@@ -13,6 +13,7 @@ export class SudijaPresudaPrikazComponent implements OnInit {
   tekstPresude: any = "";
   sanitizedTekstPresude: any = '';
   akoma: any = "";
+  attributes: any = "";
   id: any = 0;
 
   presuda: any = [];
@@ -51,6 +52,11 @@ export class SudijaPresudaPrikazComponent implements OnInit {
           .pipe(first())
           .subscribe((data: {}) => {
             this.akoma = data;
+            this.sudijaService.getAttributes(this.id)
+            .pipe(first())
+            .subscribe((data: {}) => {
+              this.attributes = data;
+            })
           })
         }
       );
