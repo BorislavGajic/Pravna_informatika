@@ -124,7 +124,7 @@ export class SudijaServiceService {
 
   getAttributes(text: any) {
     const body = {tekstPresude: text}
-    return this.http.post('http://localhost:5000/get/',body,{
+    return this.http.post('http://localhost:5000/get',body,{
       headers: new HttpHeaders().set('Content-Type', 'application/json'),
       responseType: "text", 
     });

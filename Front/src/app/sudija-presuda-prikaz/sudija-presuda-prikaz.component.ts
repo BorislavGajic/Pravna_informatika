@@ -52,7 +52,7 @@ export class SudijaPresudaPrikazComponent implements OnInit {
           .pipe(first())
           .subscribe((data: {}) => {
             this.akoma = data;
-            this.sudijaService.getAttributes(this.id)
+            this.sudijaService.getAttributes(this.tekstPresude)
             .pipe(first())
             .subscribe((data: {}) => {
               this.attributes = data;
